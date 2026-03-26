@@ -55,6 +55,10 @@ function runQuery(query, connection) {
       min: 0,
       idleTimeoutMillis: 1000,
     },
+    authentication: connection.useWorkloadIdentity ? {
+      type: 'azure-active-directory-default',
+      options: {}
+    } : undefined,
   };
 
   let incomplete;
@@ -195,6 +199,11 @@ const fields = [
     label: 'Maximum rows to return',
     description: 'Optional',
   },
+  {
+    key: 'useWorkloadIdentity',
+    formType: 'CHECKBOX',
+    label: 'Use Workload Identity (Azure)',
+  }
 ];
 
 export default {
